@@ -17,7 +17,7 @@ public class ReBalanceTest extends BaseTest {
         reBalanceStatistic = new ReBalanceStatistic();
     }
 
-    @Test(enabled = true, description = "Price reversal after Reversal FVG with Target at same TF with SL below the Last Candle of the FVG")
+    @Test(enabled = true, description = "Price reversal after FVG Test by First Candle with Target at same TF with SL below the Last Candle of the FVG")
     public void reversalAfterSweep() throws IOException {
         String data = fileRoutine.readResourceAsString("response/", "EUR_USD_D_500_candles.json");
         InputCandle inputCandle = baseStrategy.getMappedObject(data, InputCandle.class);

@@ -3,11 +3,9 @@ package strategy.elements;
 import pojo.model.candles.Candle;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-public class ReBalance extends Instruments {
+public class Rebalance extends Instruments {
 
 
     public List<Candle> reBalancesOfLongFvg(List<Candle> candles, List<List<Candle>> fvgListLong) {
