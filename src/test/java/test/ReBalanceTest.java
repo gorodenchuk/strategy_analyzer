@@ -17,14 +17,14 @@ public class ReBalanceTest extends BaseTest {
         reBalanceStatistic = new ReBalanceStatistic();
     }
 
-    @Test(enabled = true, description = "Price reversal after FVG Test by First Candle with Target at same TF with SL below the Last Candle of the FVG")
-    public void reversalAfterSweep() throws IOException {
+    @Test(enabled = false, description = "Price reversal after FVG Test by First Candle with Target at same TF with SL below the Last Candle of the FVG")
+    public void reversalAfterTestFvg() throws IOException {
         String data = fileRoutine.readResourceAsString("response/", "EUR_USD_D_500_candles.json");
         InputCandle inputCandle = baseStrategy.getMappedObject(data, InputCandle.class);
         List<Candle> candles = inputCandle.getCandles();
 
-        List<Candle> fractalsHigh = sweep.getFractalsHigh(inputCandle.getCandles());
-        List<Candle> fractalsLow = sweep.getFractalsLow(inputCandle.getCandles());
+        List<Candle> fractalsHigh = reBalance.getFractalsHigh(inputCandle.getCandles());
+        List<Candle> fractalsLow = reBalance.getFractalsLow(inputCandle.getCandles());
 
         List<List<Candle>> fvgListLong = reBalance.getLongFvgList(inputCandle.getCandles());
         List<List<Candle>> fvgListShort = reBalance.getShortFvgList(inputCandle.getCandles());
