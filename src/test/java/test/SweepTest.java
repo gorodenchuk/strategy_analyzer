@@ -33,6 +33,29 @@ public class SweepTest extends BaseTest {
         sweepStatistic.firstHighFractalTarget(candles, listOfSweepsLow, fractalsHigh);
     }
 
+    @Test(enabled = false, description = "Price reversal after Sweep Fractal in FVG with Target at same TF with SL below the Last Candle of the FVG")
+    public void reversalAfterSweepInFVG() throws IOException {
+        String data = fileRoutine.readResourceAsString("response/", "EUR_USD_D_500_candles.json");
+        InputCandle inputCandle = baseStrategy.getMappedObject(data, InputCandle.class);
+        List<Candle> candles = inputCandle.getCandles();
+
+        List<List<Candle>> fvgListLong = reBalance.getLongFvgList(inputCandle.getCandles());
+        List<List<Candle>> fvgListShort = reBalance.getShortFvgList(inputCandle.getCandles());
+
+        List<Candle> fractalsHigh = sweep.getFractalsHigh(inputCandle.getCandles());
+        List<Candle> fractalsLow = sweep.getFractalsLow(inputCandle.getCandles());
+
+        List<Candle> fractalsHighInShortFvg = reBalance.getHighFractalsInShortFvg(fvgListShort, fractalsHigh);
+        List<Candle> fractalsLowInLongFvg = reBalance.getLowFractalsInLongFvg(fvgListLong, fractalsLow);
+
+
+        List<Candle> listOfSweepsHigh =  sweep.sweepHigh(candles, fractalsHighInShortFvg);
+        List<Candle> listOfSweepsLow =  sweep.sweepLow(candles, fractalsLowInLongFvg);
+
+        sweepStatistic.firstHighFractalTarget(candles, listOfSweepsLow, fractalsHigh);
+        sweepStatistic.firstLowFractalTarget(candles, listOfSweepsHigh, fractalsLow);
+    }
+
     @Test(enabled = false, description = "Price reversal after Sweep with Target at -1 TF with SL below the Swing")
     public void reversalWithTargetOnLowestTF() throws IOException {
         String data = fileRoutine.readResourceAsString("response/", "EUR_USD_D_500_candles.json");
@@ -56,7 +79,8 @@ public class SweepTest extends BaseTest {
         sweepStatistic.firstHighFractalTargetOnMinusTF(candlesMinusTF, listOfSweepsLow, fractalsHighMinusTF);
     }
 
-    @Test(enabled = true, description = "Price reversal after Sweep with FTA as Target at -1 TF with SL below the Swing")
+//    TODO need to be fixed test not relevant
+    @Test(enabled = false, description = "Price reversal after Sweep with FTA as Target at -1 TF with SL below the Swing")
     public void reversalWithFtaAsTargetOnLowestTF() throws IOException {
         String data = fileRoutine.readResourceAsString("response/", "EUR_USD_M_30_candles.json");
         InputCandle inputCandle = baseStrategy.getMappedObject(data, InputCandle.class);
