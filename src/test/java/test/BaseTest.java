@@ -1,5 +1,6 @@
 package test;
 
+import stat.EntryModelsStatistic;
 import stat.ReBalanceStatistic;
 import stat.SweepStatistic;
 import strategy.elements.BaseStrategy;
@@ -16,4 +17,5 @@ public class BaseTest {
     protected Rebalance reBalance = new Rebalance();
     protected ReBalanceStatistic reBalanceStatistic;
     protected SweepStatistic sweepStatistic;
+    protected EntryModelsStatistic entryModelsStatistic;
 }

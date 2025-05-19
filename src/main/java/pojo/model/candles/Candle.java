@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import javax.annotation.processing.Generated;
+import java.util.Objects;
 
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -26,5 +27,25 @@ public class Candle {
     @Override
     public String toString() {
         return "Candle{" + "complete=" + complete + ", volume=" + volume + ", time='" + time + '\'' + ", mid=" + mid + '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Candle)) return false;
+
+        Candle candle = (Candle) o;
+
+        if (!complete.equals(candle.complete)) return false;
+        if (!volume.equals(candle.volume)) return false;
+        if (!time.equals(candle.time)) return false;
+        return mid.equals(candle.mid);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getComplete(), getVolume(), getTime(), getMid());
     }
 }
