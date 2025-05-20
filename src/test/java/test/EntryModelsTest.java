@@ -28,6 +28,7 @@ public class EntryModelsTest extends BaseTest {
         List<Candle> fractalsHigh = sweep.getFractalsHigh(inputCandle.getCandles());
         List<Candle> fractalsLow = sweep.getFractalsLow(inputCandle.getCandles());
 
+//        TODO For better stat need to be taken only unique sweeps
         List<Candle> listOfSweepsHigh =  sweep.sweepHigh(candles, fractalsHigh);
         List<Candle> listOfSweepsLow =  sweep.sweepLow(candles, fractalsLow);
 
@@ -46,8 +47,7 @@ public class EntryModelsTest extends BaseTest {
         List<Candle> fractalsLowMinus2TF = sweep.getFractalsLow(inputCandleMinus2TF.getCandles());
         List<Candle> fractalsHighMinus2TF = sweep.getFractalsHigh(inputCandleMinus2TF.getCandles());
 
-
-//        entryModelsStatistic.smrHighFractalTarget(listOfSweepsLow, fractalsLow, candlesMinus1TF, fractalsHighMinus1TF, candlesMinus2TF, fractalsHighMinus2TF, fractalsLowMinus2TF);
+        entryModelsStatistic.smrHighFractalTarget(listOfSweepsLow, fractalsLow, candlesMinus1TF, fractalsHighMinus1TF, candlesMinus2TF, fractalsHighMinus2TF, fractalsLowMinus2TF);
         entryModelsStatistic.smrLowFractalTarget(listOfSweepsHigh, fractalsHigh, candlesMinus1TF, fractalsLowMinus1TF, candlesMinus2TF, fractalsLowMinus2TF, fractalsHighMinus2TF);
     }
 

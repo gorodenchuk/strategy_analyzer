@@ -59,7 +59,7 @@ public class EntryModelsStatistic extends BaseStatistic {
                 boolean isSnr = entryModels.isSnrShort(fractalsHigh, fractalsHighMinus2TF, fractalsLowMinus2TF, candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
                 boolean isSnrEntry;
 
-                String targetResult = target.getReachedHighFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
+                String targetResult = target.getReachedLowFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
 
                 if (isSnr) {
                     isSnrEntry = entryModels.entryModelShortTest(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvl);

@@ -146,7 +146,7 @@ public class Sweep extends Instruments {
 
         fractalsHighMinus2TF = fractalsHighMinus2TF.stream()
                 .filter(fractal -> Double.parseDouble(fractal.getMid().getH()) >= rebalancedCandleHigh)
-                .filter(fractal -> Double.parseDouble(fractal.getMid().getH()) > candleInvlMinus2TfHigh)
+                .filter(fractal -> Double.parseDouble(fractal.getMid().getH()) < candleInvlMinus2TfHigh)
                 .filter(fractal -> {
                     Instant rebalancedFractalInstant = Instant.parse(candlesSubList.get(candlesSubList.indexOf(rebalancedFractalMinus2TF)).getTime());
                     Instant candleInvlMinus2TFInstant = Instant.parse(candleInvlMinus2TF.getTime());

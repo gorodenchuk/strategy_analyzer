@@ -45,7 +45,7 @@ public class EntryModels extends Instruments {
 
         Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesSubList, candleInvl);
         int indexBosLevel = candleHelper.getHighFractalIndexBeforeSweep(fractalsHigh, candleInvlMinus2TF);
-        Candle targetValidationCandle = target.getTargetLevelValidatedCandle(candlesSubList, fractalsHigh, candleInvl);
+        Candle targetValidationCandle = target.getTargetHighLevelValidatedCandle(candlesSubList, fractalsHigh, candleInvl);
 
         candlesSubList.subList(0, candlesSubList.indexOf(targetValidationCandle)).clear();
 
@@ -73,11 +73,12 @@ public class EntryModels extends Instruments {
         boolean isSnrTest = false;
         List<Candle> candlesSubList = new ArrayList<>(candles);
 
+        Candle targetValidationCandle = target.getTargetLowLevelValidatedCandle(candlesSubList, fractalsLow, candleInvl);
         Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesSubList, candleInvl);
         int indexBosLevel = candleHelper.getLowFractalIndexBeforeSweep(fractalsLow, candleInvlMinus2TF);
-        Candle targetValidationCandle = target.getTargetLevelValidatedCandle(candlesSubList, fractalsLow, candleInvl);
 
         candlesSubList.subList(0, candlesSubList.indexOf(targetValidationCandle)).clear();
+
 
         if (indexBosLevel != -1) {
             Candle bosLevel = fractalsLow.get(indexBosLevel);

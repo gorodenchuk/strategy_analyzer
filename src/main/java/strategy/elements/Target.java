@@ -138,7 +138,7 @@ public class Target extends Instruments {
         return isValidated;
     }
 
-    public Candle getTargetLevelValidatedCandle(List<Candle> candles, List<Candle> fractalsHigh, Candle candleInvl) {
+    public Candle getTargetHighLevelValidatedCandle(List<Candle> candles, List<Candle> fractalsHigh, Candle candleInvl) {
         Candle candleValidated = null;
         List<Candle> candlesSubList = new ArrayList<>(candles);
         Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candles, candleInvl);
@@ -167,6 +167,42 @@ public class Target extends Instruments {
                 } else if (direction.equals("short") && bosLevelLow > candleLow && bosLevelLow < candleClose) {
                     break;
                 } else if (direction.equals("long") && bosLevelLow > candleLow && bosLevelLow < candleOpen) {
+                    break;
+                }
+            }
+        }
+        return candleValidated;
+    }
+
+    public Candle getTargetLowLevelValidatedCandle(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvl) {
+        Candle candleValidated = null;
+        List<Candle> candlesSubList = new ArrayList<>(candles);
+        Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candles, candleInvl);
+        int indexBosLevel = candleHelper.getLowFractalIndexBeforeSweep(fractalsLow, candleInvlMinus2TF);
+
+        candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
+
+        if (indexBosLevel != -1) {
+            Candle bosLevelCandle = fractalsLow.get(indexBosLevel);
+            double bosLevelLow = Double.parseDouble(bosLevelCandle.getMid().getL());
+            double bosLevelHigh = Double.parseDouble(candleInvlMinus2TF.getMid().getH());
+            int index = candlesSubList.indexOf(bosLevelCandle);
+
+            for (int i = index + 2; i < candlesSubList.size(); i++) {
+
+                Candle candle = candlesSubList.get(i);
+                String direction = candleHelper.getCandleDirection(candle);
+
+                double candleHigh = Double.parseDouble(candle.getMid().getH());
+                double candleOpen = Double.parseDouble(candle.getMid().getO());
+                double candleClose = Double.parseDouble(candle.getMid().getC());
+
+                if (candleHelper.isInClosedRangeHigh(bosLevelLow, candleClose, candleOpen)) {
+                    candleValidated = candle;
+                    break;
+                } else if (direction.equals("short") && bosLevelHigh < candleHigh && bosLevelHigh > candleOpen) {
+                    break;
+                } else if (direction.equals("long") && bosLevelHigh < candleHigh && bosLevelHigh > candleClose) {
                     break;
                 }
             }

@@ -68,7 +68,7 @@ public class Instruments extends BaseStrategy {
         List<Candle> candlesSubList = new ArrayList<>(candles);
 
         Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesSubList, candleInvl);
-        Candle targetLevelValidation = candleHelper.getTargetLevelValidation(candlesSubList, fractalsHigh, candleInvl);
+        Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesSubList, fractalsHigh, candleInvl);
 
         candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
         candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
@@ -94,7 +94,7 @@ public class Instruments extends BaseStrategy {
         List<Candle> candlesSubList = new ArrayList<>(candles);
 
         Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesSubList, candleInvl);
-        Candle targetLevelValidation = candleHelper.getTargetLevelValidation(candlesSubList, fractalsLow, candleInvl);
+        Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesSubList, fractalsLow, candleInvl);
 
         candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
         candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
