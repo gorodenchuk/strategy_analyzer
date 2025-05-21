@@ -2,6 +2,7 @@ package stat;
 
 import helper.CandleHelper;
 import helper.FvgHelper;
+import strategy.elements.EntryModels;
 import strategy.elements.Sweep;
 import strategy.elements.Target;
 
@@ -11,6 +12,7 @@ public class BaseStatistic {
     protected FvgHelper fvgHelper = new FvgHelper();
     protected Sweep sweep = new Sweep();
     protected Target target = new Target();
+    protected EntryModels entryModels = new EntryModels();
 
     int wins = 0, losses = 0, be = 0;
 

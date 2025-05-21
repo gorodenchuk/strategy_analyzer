@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pojo.model.candles.Candle;
 import pojo.model.candles.InputCandle;
+import stat.EntryModelsStatistic;
 import stat.SweepStatistic;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class SweepTest extends BaseTest {
     @BeforeMethod
     private void beforeMethod() {
         sweepStatistic = new SweepStatistic();
+        entryModelsStatistic = new EntryModelsStatistic();
     }
 
     @Test(enabled = false, description = "Price reversal after Sweep with Target at same TF with SL below the Swing")

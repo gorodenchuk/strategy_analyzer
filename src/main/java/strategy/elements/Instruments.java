@@ -63,6 +63,58 @@ public class Instruments extends BaseStrategy {
         return fvgList;
     }
 
+    public List<List<Candle>> getLongFvgList(List<Candle> candles, List<Candle> fractalsHigh, Candle candleInvl) {
+        List<List<Candle>> fvgList = new ArrayList<>();
+        List<Candle> candlesSubList = new ArrayList<>(candles);
+
+        Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesSubList, candleInvl);
+        Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesSubList, fractalsHigh, candleInvl);
+
+        candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
+        candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
+
+        for (int i = 1; i < candlesSubList.size() - 1; i++) {
+            double firstElement = Double.parseDouble(candlesSubList.get(i - 1).getMid().getH());
+            double thirdElement = Double.parseDouble(candlesSubList.get(i + 1).getMid().getL());
+
+            if (firstElement < thirdElement) {
+                List<Candle> fvg = new ArrayList<>();
+                fvg.add(candlesSubList.get(i - 1));
+                fvg.add(candlesSubList.get(i));
+                fvg.add(candlesSubList.get(i + 1));
+
+                fvgList.add(fvg);
+            }
+        }
+        return fvgList;
+    }
+
+    public List<List<Candle>> getShortFvgList(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvl) {
+        List<List<Candle>> fvgList = new ArrayList<>();
+        List<Candle> candlesSubList = new ArrayList<>(candles);
+
+        Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesSubList, candleInvl);
+        Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesSubList, fractalsLow, candleInvl);
+
+        candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
+        candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
+
+        for (int i = 1; i < candlesSubList.size() - 1; i++) {
+            double firstElement = Double.parseDouble(candlesSubList.get(i - 1).getMid().getL());
+            double thirdElement = Double.parseDouble(candlesSubList.get(i + 1).getMid().getH());
+
+            if (firstElement > thirdElement) {
+                List<Candle> fvg = new ArrayList<>();
+                fvg.add(candlesSubList.get(i - 1));
+                fvg.add(candlesSubList.get(i));
+                fvg.add(candlesSubList.get(i + 1));
+
+                fvgList.add(fvg);
+            }
+        }
+        return fvgList;
+    }
+
     public List<Candle> getFractalsLow(List<Candle> candles) {
         List<Candle> fractals = new ArrayList<>();
 
@@ -91,27 +143,6 @@ public class Instruments extends BaseStrategy {
             }
         }
         return fractals;
-    }
-
-    public List<Candle> getReBalancedLongFvgByCandle(List<List<Candle>> fvgList, Candle candle) {
-        double low = Double.parseDouble(candle.getMid().getL());
-        Instant candleInstant = Instant.parse(candle.getTime());
-        List<Candle> fvgRebalanced = null;
-
-        for (int i = 0; i < fvgList.size(); i++) {
-            List<Candle> fvg = fvgList.get(i);
-            Instant fvgLastCandleInstant = Instant.parse(fvg.get(2).getTime());
-            double firstCandleHigh = Double.parseDouble(fvg.get(0).getMid().getH());
-            double thirdCandleLow = Double.parseDouble(fvg.get(2).getMid().getL());
-
-            if (fvgLastCandleInstant.isBefore(candleInstant) && low > firstCandleHigh && low < thirdCandleLow) {
-                fvgRebalanced = fvg;
-            }
-//            else if (low < firstCandleHigh) {
-//                break;
-//            }
-        }
-        return fvgRebalanced;
     }
 
     public List<Candle> getLowFractalsInLongFvg(List<List<Candle>> fvgListLong, List<Candle> fractalsLow) {

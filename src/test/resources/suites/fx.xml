@@ -6,7 +6,8 @@
     <test name="Sweep swings">
         <classes>
 <!--            <class name="test.ReBalanceTest"/>-->
-            <class name="test.SweepTest"/>
+<!--            <class name="test.SweepTest"/>-->
+            <class name="test.EntryModelsTest"/>
         </classes>
     </test>
 

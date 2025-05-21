@@ -53,5 +53,4 @@ public class Rebalance extends Instruments {
         }
         return reBalanceCandles;
     }
-
 }
