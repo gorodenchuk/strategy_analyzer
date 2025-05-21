@@ -7,10 +7,13 @@ import java.util.List;
 public class EntryModelsStatistic extends BaseStatistic {
 
     int entryModel = 0, entryModelTest = 0;
+    double rr = 0.0;
 
     @Override
     public void getResults() {
-        System.out.printf("Total: %d | Wins: %d | Losses: %d | BE: %d |Win Rate: %.2f%% | Entry Model presents: %d | Entry Model test: %d\n", wins + losses, wins, losses, be, 100.0 * wins / (wins + losses), entryModel, entryModelTest);
+        System.out.printf("Total: %d | Wins: %d | Losses: %d | BE: %d |Win Rate: %.2f%%\n", wins + losses, wins, losses, be, 100.0 * wins / (wins + losses));
+        System.out.printf("Entry Model presents: %d | Entry Model test: %d\n", entryModel, entryModelTest);
+        System.out.printf("Total RR : %f | Average RR: %f\n", rr, rr / (wins + losses));
     }
 
     public void smrHighFractalTarget(List<Candle> sweepLiquidityCandles, List<Candle> fractalsLow, List<Candle> candlesOnMinus1TF, List<Candle> fractalsHighMinus1TF, List<Candle> candlesOnMinus2TF, List<Candle> fractalsHighMinus2TF, List<Candle> fractalsLowMinus2TF) {
