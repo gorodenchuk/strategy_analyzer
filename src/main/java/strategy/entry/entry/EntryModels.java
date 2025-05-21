@@ -1,15 +1,21 @@
-package strategy.elements;
+package strategy.entry.entry;
 
+import helper.CandleHelper;
 import pojo.model.candles.Candle;
+import strategy.elements.Instruments;
+import strategy.elements.Rebalance;
+import strategy.elements.Sweep;
+import strategy.elements.Target;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntryModels extends Instruments {
+public class EntryModels {
 
     private final Sweep sweep = new Sweep();
     private final Target target = new Target();
     private final Rebalance reBalance = new Rebalance();
+    private final CandleHelper candleHelper = new CandleHelper();
 
 
     public boolean isSnrLong(List<Candle> fractalsLow, List<Candle> fractalsLowMinus2TF, List<Candle> fractalsHighMinus2TF, List<Candle> candlesOnMinus2TF, Candle takeProfitMinus2TF, Candle candleInvl) {

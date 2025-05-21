@@ -12,6 +12,8 @@ import java.util.List;
 
 public class EntryModelsTest extends BaseTest {
 
+    private final static double RISK = 1.0;
+
     @BeforeMethod
     private void beforeMethod() {
         entryModelsStatistic = new EntryModelsStatistic();
@@ -45,8 +47,8 @@ public class EntryModelsTest extends BaseTest {
         List<Candle> fractalsLowMinus2TF = sweep.getFractalsLow(candlesMinus2TF);
         List<Candle> fractalsHighMinus2TF = sweep.getFractalsHigh(candlesMinus2TF);
 
-        entryModelsStatistic.smrHighFractalTarget(listOfSweepsLow, fractalsLow, candlesMinus1TF, fractalsHighMinus1TF, candlesMinus2TF, fractalsHighMinus2TF, fractalsLowMinus2TF);
-        entryModelsStatistic.smrLowFractalTarget(listOfSweepsHigh, fractalsHigh, candlesMinus1TF, fractalsLowMinus1TF, candlesMinus2TF, fractalsLowMinus2TF, fractalsHighMinus2TF);
+        entryModelsStatistic.smrHighFractalTarget(RISK, listOfSweepsLow, fractalsLow, candlesMinus1TF, fractalsHighMinus1TF, candlesMinus2TF, fractalsHighMinus2TF, fractalsLowMinus2TF);
+        entryModelsStatistic.smrLowFractalTarget(RISK,listOfSweepsHigh, fractalsHigh, candlesMinus1TF, fractalsLowMinus1TF, candlesMinus2TF, fractalsLowMinus2TF, fractalsHighMinus2TF);
     }
 
     @AfterMethod
