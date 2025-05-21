@@ -79,15 +79,9 @@ public class Sweep extends Instruments {
         return sweepCandles;
     }
 
-    public List<Candle> sweepLow(List<Candle> candlesOnMinus2TF, List<Candle> fractalsLowMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvl) {
+    public List<Candle> sweepLow(List<Candle> candlesOnMinus2TF, List<Candle> fractalsLowMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvlMinus2TF) {
         List<Candle> sweepCandles = new ArrayList<>();
-        List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
-
-        int indexOfRebalancedFractal = candlesOnMinus2TF.indexOf(rebalancedFractalMinus2TF);
-
-        candlesSubList.subList(0, indexOfRebalancedFractal).clear();
-        Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesSubList, candleInvl);
-        candlesSubList.subList(candlesSubList.indexOf(candleInvlMinus2TF) + 1, candlesSubList.size()).clear();
+        List<Candle> candlesSubList = candleHelper.getCandleSublistSweep(candlesOnMinus2TF, rebalancedFractalMinus2TF, candleInvlMinus2TF);
 
         double rebalancedCandleLow = Double.parseDouble(rebalancedFractalMinus2TF.getMid().getL());
         double candleInvlMinus2TfLow = Double.parseDouble(candleInvlMinus2TF.getMid().getL());
@@ -131,15 +125,9 @@ public class Sweep extends Instruments {
         return sweepCandles;
     }
 
-    public List<Candle> sweepHigh(List<Candle> candlesOnMinus2TF, List<Candle> fractalsHighMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvl) {
+    public List<Candle> sweepHigh(List<Candle> candlesOnMinus2TF, List<Candle> fractalsHighMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvlMinus2TF) {
         List<Candle> sweepCandles = new ArrayList<>();
-        List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
-
-        int indexOfRebalancedFractal = candlesOnMinus2TF.indexOf(rebalancedFractalMinus2TF);
-
-        candlesSubList.subList(0, indexOfRebalancedFractal).clear();
-        Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesSubList, candleInvl);
-        candlesSubList.subList(candlesSubList.indexOf(candleInvlMinus2TF) + 1, candlesSubList.size()).clear();
+        List<Candle> candlesSubList = candleHelper.getCandleSublistSweep(candlesOnMinus2TF, rebalancedFractalMinus2TF, candleInvlMinus2TF);
 
         double rebalancedCandleHigh = Double.parseDouble(rebalancedFractalMinus2TF.getMid().getH());
         double candleInvlMinus2TfHigh = Double.parseDouble(candleInvlMinus2TF.getMid().getH());

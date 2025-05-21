@@ -63,15 +63,9 @@ public class Instruments extends BaseStrategy {
         return fvgList;
     }
 
-    public List<List<Candle>> getLongFvgList(List<Candle> candles, List<Candle> fractalsHigh, Candle candleInvl) {
+    public List<List<Candle>> getLongFvgList(List<Candle> candles, Candle candleInvlMinus2TF, Candle targetLevelValidation) {
         List<List<Candle>> fvgList = new ArrayList<>();
-        List<Candle> candlesSubList = new ArrayList<>(candles);
-
-        Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesSubList, candleInvl);
-        Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesSubList, fractalsHigh, candleInvl);
-
-        candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
-        candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
+        List<Candle> candlesSubList = candleHelper.getCandleSublistFvg(candles, candleInvlMinus2TF, targetLevelValidation);
 
         for (int i = 1; i < candlesSubList.size() - 1; i++) {
             double firstElement = Double.parseDouble(candlesSubList.get(i - 1).getMid().getH());
@@ -89,15 +83,9 @@ public class Instruments extends BaseStrategy {
         return fvgList;
     }
 
-    public List<List<Candle>> getShortFvgList(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvl) {
+    public List<List<Candle>> getShortFvgList(List<Candle> candles, Candle candleInvlMinus2TF, Candle targetLevelValidation) {
         List<List<Candle>> fvgList = new ArrayList<>();
-        List<Candle> candlesSubList = new ArrayList<>(candles);
-
-        Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesSubList, candleInvl);
-        Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesSubList, fractalsLow, candleInvl);
-
-        candlesSubList.subList(0, candlesSubList.indexOf(candleInvlMinus2TF)).clear();
-        candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
+        List<Candle> candlesSubList = candleHelper.getCandleSublistFvg(candles, candleInvlMinus2TF, targetLevelValidation);
 
         for (int i = 1; i < candlesSubList.size() - 1; i++) {
             double firstElement = Double.parseDouble(candlesSubList.get(i - 1).getMid().getL());

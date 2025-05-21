@@ -1,6 +1,7 @@
 package stat;
 
 import pojo.model.candles.Candle;
+import strategy.entry.entry.Smr;
 import strategy.metrics.RiskRewards;
 
 import java.util.List;
@@ -27,22 +28,28 @@ public class EntryModelsStatistic extends BaseStatistic {
                 /*
                  take profit is higher than the first fractal on -1TF after sweep. Could be changed in the future.
                 */
+
+
                 Candle takeProfitMinus1TF = fractalsHighMinus1TF.get(index);
                 Candle takeProfitMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, takeProfitMinus1TF);
                 Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, candleInvl);
 
+                Candle rebalancedFractalMinus2TF = candleHelper.getLowRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsLow, candleInvl);
+                Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvl);
+                Candle targetValidationCandle = target.getTargetHighLevelValidatedCandle(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF);
+
                 double entry = Double.parseDouble(entryPoint.getBosHighLevel(fractalsHighMinus2TF, candleInvlMinus2TF).getMid().getH());
                 double takeProfit = Double.parseDouble(takeProfitMinus2TF.getMid().getH());
-                double stopLoss = Double.parseDouble(candleInvl.getMid().getL());
+                double stopLoss = Double.parseDouble(candleInvlMinus2TF.getMid().getL());
 
-                boolean isSnr = entryModels.isSnrLong(fractalsLow, fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
+                smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, targetLevelValidation);
+                boolean isSnr = smr.isSmrLong();
                 boolean isSnrEntry;
 
-                String targetResult = target.getReachedHighFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
-
+                String targetResult = target.getReachedHighFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvlMinus2TF);
 
                 if (isSnr) {
-                    isSnrEntry = entryModels.entryModelLongTest(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvl);
+                    isSnrEntry = entryModels.entryModelLongTest(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF, targetValidationCandle);
                     entryModel++;
 
                     if (isSnrEntry) {
@@ -72,17 +79,22 @@ public class EntryModelsStatistic extends BaseStatistic {
                 Candle takeProfitMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, takeProfitMinus1TF);
                 Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, candleInvl);
 
+                Candle rebalancedFractalMinus2TF = candleHelper.getHighRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsHigh, candleInvl);
+                Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvl);
+                Candle targetValidationCandle = target.getTargetLowLevelValidatedCandle(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF);
+
                 double entry = Double.parseDouble(entryPoint.getBosLowLevel(fractalsLowMinus2TF, candleInvlMinus2TF).getMid().getL());
                 double takeProfit = Double.parseDouble(takeProfitMinus2TF.getMid().getL());
-                double stopLoss = Double.parseDouble(candleInvl.getMid().getH());
+                double stopLoss = Double.parseDouble(candleInvlMinus2TF.getMid().getH());
 
-                boolean isSnr = entryModels.isSnrShort(fractalsHigh, fractalsHighMinus2TF, fractalsLowMinus2TF, candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
+                smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, targetLevelValidation);
+                boolean isSnr = smr.isSmrShort();
                 boolean isSnrEntry;
 
-                String targetResult = target.getReachedLowFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvl);
+                String targetResult = target.getReachedLowFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvlMinus2TF);
 
                 if (isSnr) {
-                    isSnrEntry = entryModels.entryModelShortTest(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvl);
+                    isSnrEntry = entryModels.entryModelShortTest(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF, targetValidationCandle);
                     entryModel++;
 
                     if (isSnrEntry) {
