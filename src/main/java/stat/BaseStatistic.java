@@ -2,9 +2,11 @@ package stat;
 
 import helper.CandleHelper;
 import helper.FvgHelper;
-import strategy.elements.EntryModels;
+import strategy.elements.EntryPoint;
+import strategy.entry.entry.EntryModels;
 import strategy.elements.Sweep;
 import strategy.elements.Target;
+import strategy.metrics.RiskRewards;
 
 public class BaseStatistic {
 
@@ -13,6 +15,8 @@ public class BaseStatistic {
     protected Sweep sweep = new Sweep();
     protected Target target = new Target();
     protected EntryModels entryModels = new EntryModels();
+    protected EntryPoint entryPoint = new EntryPoint();
+    protected RiskRewards riskRewards;
 
     int wins = 0, losses = 0, be = 0;
 
