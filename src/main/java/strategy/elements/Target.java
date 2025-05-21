@@ -23,7 +23,6 @@ public class Target extends Instruments {
 
             if (takeProfit < candleHigh) {
                 reachedTarget = "TP";
-//                System.out.println("TP " + candle.getTime() + " " + takeProfit);
                 break;
             } else if (stopLoss > candleLow) {
                 reachedTarget = "SL";
