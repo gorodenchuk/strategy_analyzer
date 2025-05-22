@@ -21,8 +21,8 @@ public class EntryModelsStatistic extends BaseStatistic {
     public void smrHighFractalTarget(double risk, List<Candle> sweepLiquidityCandles, List<Candle> fractalsLow, List<Candle> candlesOnMinus1TF, List<Candle> fractalsHighMinus1TF, List<Candle> candlesOnMinus2TF, List<Candle> fractalsHighMinus2TF, List<Candle> fractalsLowMinus2TF) {
 
         for (Candle candleParent : sweepLiquidityCandles) {
-            Candle candleInvl = candleHelper.getCandleByLow(candlesOnMinus1TF, candleParent);
-            int index = candleHelper.getHighFractalIndexBeforeSweep(fractalsHighMinus1TF, candleInvl);
+            Candle candleInvlMinus1TF = candleHelper.getCandleByLow(candlesOnMinus1TF, candleParent);
+            int index = candleHelper.getHighFractalIndexBeforeSweep(fractalsHighMinus1TF, candleInvlMinus1TF);
 
             if (index != -1) {
                 /*
@@ -32,10 +32,10 @@ public class EntryModelsStatistic extends BaseStatistic {
 
                 Candle takeProfitMinus1TF = fractalsHighMinus1TF.get(index);
                 Candle takeProfitMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, takeProfitMinus1TF);
-                Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, candleInvl);
+                Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, candleInvlMinus1TF);
 
-                Candle rebalancedFractalMinus2TF = candleHelper.getLowRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsLow, candleInvl);
-                Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvl);
+                Candle rebalancedFractalMinus2TF = candleHelper.getLowRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsLow, candleInvlMinus1TF);
+                Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF);
                 Candle targetValidationCandle = target.getTargetHighLevelValidatedCandle(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF);
 
                 double entry = Double.parseDouble(entryPoint.getBosHighLevel(fractalsHighMinus2TF, candleInvlMinus2TF).getMid().getH());
@@ -68,8 +68,8 @@ public class EntryModelsStatistic extends BaseStatistic {
 
     public void smrLowFractalTarget(double risk, List<Candle> sweepLiquidityCandles, List<Candle> fractalsHigh, List<Candle> candlesOnMinus1TF, List<Candle> fractalsLowMinus1TF, List<Candle> candlesOnMinus2TF, List<Candle> fractalsLowMinus2TF, List<Candle> fractalsHighMinus2TF) {
         for (Candle candleParent : sweepLiquidityCandles) {
-            Candle candleInvl = candleHelper.getCandleByHigh(candlesOnMinus1TF, candleParent);
-            int index = candleHelper.getLowFractalIndexBeforeSweep(fractalsLowMinus1TF, candleInvl);
+            Candle candleInvlMinus1TF = candleHelper.getCandleByHigh(candlesOnMinus1TF, candleParent);
+            int index = candleHelper.getLowFractalIndexBeforeSweep(fractalsLowMinus1TF, candleInvlMinus1TF);
 
             if (index != -1) {
                 /*
@@ -77,10 +77,10 @@ public class EntryModelsStatistic extends BaseStatistic {
                 */
                 Candle takeProfitMinus1TF = fractalsLowMinus1TF.get(index);
                 Candle takeProfitMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, takeProfitMinus1TF);
-                Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, candleInvl);
+                Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, candleInvlMinus1TF);
 
-                Candle rebalancedFractalMinus2TF = candleHelper.getHighRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsHigh, candleInvl);
-                Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvl);
+                Candle rebalancedFractalMinus2TF = candleHelper.getHighRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsHigh, candleInvlMinus1TF);
+                Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF);
                 Candle targetValidationCandle = target.getTargetLowLevelValidatedCandle(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF);
 
                 double entry = Double.parseDouble(entryPoint.getBosLowLevel(fractalsLowMinus2TF, candleInvlMinus2TF).getMid().getL());

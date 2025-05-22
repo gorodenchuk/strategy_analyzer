@@ -216,10 +216,9 @@ public class CandleHelper extends BaseHelper {
         return candleValidated;
     }
 
-    public Candle getTargetLowLevelValidation(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvl) {
+    public Candle getTargetLowLevelValidation(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvlMinus2TF) {
         Candle candleValidated = null;
         List<Candle> candlesSubList = new ArrayList<>(candles);
-        Candle candleInvlMinus2TF = getCandleByHigh(candles, candleInvl);
         int indexBosLevel = getLowFractalIndexBeforeSweep(fractalsLow, candleInvlMinus2TF);
 
         candlesSubList.subList(0, indexBosLevel).clear();
