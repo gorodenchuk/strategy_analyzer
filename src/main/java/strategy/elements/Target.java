@@ -61,11 +61,10 @@ public class Target extends Instruments {
         return reachedTarget;
     }
 
-    public boolean isTargetHighLevelValidated(List<Candle> candlesOnMinus2TF, List<Candle> fractalsHighMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvl) {
+    public boolean isTargetHighLevelValidated(List<Candle> candlesOnMinus2TF, List<Candle> fractalsHighMinus2TF, Candle candleInvlMinus2TF) {
         boolean isValidated = false;
         List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
 
-        Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, candleInvl);
         int indexCandleInvlMinus2TF = candleHelper.getIndex(candlesSubList, candleInvlMinus2TF);
         int indexBosLevel = candleHelper.getHighFractalIndexBeforeSweep(fractalsHighMinus2TF, candleInvlMinus2TF);
 
@@ -99,7 +98,7 @@ public class Target extends Instruments {
         return isValidated;
     }
 
-    public boolean isTargetLowLevelValidated(List<Candle> candlesOnMinus2TF, List<Candle> fractalsLowMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvl) {
+    public boolean isTargetLowLevelValidated(List<Candle> candlesOnMinus2TF, List<Candle> fractalsLowMinus2TF, Candle candleInvl) {
         boolean isValidated = false;
         List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
 

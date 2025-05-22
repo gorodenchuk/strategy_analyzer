@@ -181,10 +181,9 @@ public class CandleHelper extends BaseHelper {
         return (close >= fractal && fractal >= open || open >= fractal && fractal >= close);
     }
 
-    public Candle getTargetHighLevelValidation(List<Candle> candles, List<Candle> fractalsHigh, Candle candleInvl) {
+    public Candle getTargetHighLevelValidation(List<Candle> candles, List<Candle> fractalsHigh, Candle candleInvlMinus2TF) {
         Candle candleValidated = null;
         List<Candle> candlesSubList = new ArrayList<>(candles);
-        Candle candleInvlMinus2TF = getCandleByLow(candles, candleInvl);
         int indexBosLevel = getHighFractalIndexBeforeSweep(fractalsHigh, candleInvlMinus2TF);
 
         candlesSubList.subList(0, indexBosLevel).clear();
@@ -217,10 +216,9 @@ public class CandleHelper extends BaseHelper {
         return candleValidated;
     }
 
-    public Candle getTargetLowLevelValidation(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvl) {
+    public Candle getTargetLowLevelValidation(List<Candle> candles, List<Candle> fractalsLow, Candle candleInvlMinus2TF) {
         Candle candleValidated = null;
         List<Candle> candlesSubList = new ArrayList<>(candles);
-        Candle candleInvlMinus2TF = getCandleByHigh(candles, candleInvl);
         int indexBosLevel = getLowFractalIndexBeforeSweep(fractalsLow, candleInvlMinus2TF);
 
         candlesSubList.subList(0, indexBosLevel).clear();
@@ -265,4 +263,31 @@ public class CandleHelper extends BaseHelper {
         return getCandleByHigh(candlesOnMinus2TF, fractalContextSweep);
     }
 
+    public List<Candle> getCandleSublistSweep(List<Candle> candlesOnMinus2TF, Candle rebalancedFractalMinus2TF, Candle candleInvlMinus2TF) {
+        List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
+        int indexOfRebalancedFractal = candlesOnMinus2TF.indexOf(rebalancedFractalMinus2TF);
+
+        candlesSubList.subList(0, indexOfRebalancedFractal).clear();
+        candlesSubList.subList(candlesSubList.indexOf(candleInvlMinus2TF) + 1, candlesSubList.size()).clear();
+
+        return candlesSubList;
+    }
+
+    public List<Candle> getCandleSublistFvg(List<Candle> candlesOnMinus2TF, Candle candleInvlMinus2TF, Candle targetLevelValidation) {
+        List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
+        int indexOfInvlCandle = candlesSubList.indexOf(candleInvlMinus2TF);
+
+        candlesSubList.subList(0, indexOfInvlCandle).clear();
+        candlesSubList.subList(candlesSubList.indexOf(targetLevelValidation) + 2, candlesSubList.size()).clear();
+
+        return candlesSubList;
+    }
+
+    public List<Candle> getCandleSublistEntry(List<Candle> candlesOnMinus2TF, Candle targetValidationCandle) {
+        List<Candle> candlesSubList = new ArrayList<>(candlesOnMinus2TF);
+
+        candlesSubList.subList(0, candlesSubList.indexOf(targetValidationCandle)).clear();
+
+        return candlesSubList;
+    }
 }
