@@ -28,8 +28,6 @@ public class EntryModelsStatistic extends BaseStatistic {
                 /*
                  take profit is higher than the first fractal on -1TF after sweep. Could be changed in the future.
                 */
-
-
                 Candle takeProfitMinus1TF = fractalsHighMinus1TF.get(index);
                 Candle takeProfitMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, takeProfitMinus1TF);
                 Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, candleInvlMinus1TF);
