@@ -97,7 +97,6 @@ public class EntryModelsStatistic extends BaseStatistic {
                     if (isSnrEntry) {
                         riskRewards = new RiskRewards(entry, takeProfit, stopLoss, risk);
                         entryModelTest++;
-                        System.out.println(riskRewards.getRiskReward(targetResult));
                         rr += riskRewards.getRiskReward(targetResult);
                     }
 
