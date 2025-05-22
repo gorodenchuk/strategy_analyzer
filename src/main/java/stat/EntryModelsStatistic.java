@@ -1,6 +1,7 @@
 package stat;
 
 import pojo.model.candles.Candle;
+import strategy.entry.entry.EntryModels;
 import strategy.entry.entry.Smr;
 import strategy.metrics.RiskRewards;
 
@@ -33,21 +34,20 @@ public class EntryModelsStatistic extends BaseStatistic {
                 Candle candleInvlMinus2TF = candleHelper.getCandleByLow(candlesOnMinus2TF, candleInvlMinus1TF);
 
                 Candle rebalancedFractalMinus2TF = candleHelper.getLowRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsLow, candleInvlMinus1TF);
-                Candle targetLevelValidation = candleHelper.getTargetHighLevelValidation(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF);
-                Candle targetValidationCandle = target.getTargetHighLevelValidatedCandle(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF);
+                Candle smrVlCandle = candleHelper.getTargetHighLevelValidation(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF);
 
                 double entry = Double.parseDouble(entryPoint.getBosHighLevel(fractalsHighMinus2TF, candleInvlMinus2TF).getMid().getH());
                 double takeProfit = Double.parseDouble(takeProfitMinus2TF.getMid().getH());
                 double stopLoss = Double.parseDouble(candleInvlMinus2TF.getMid().getL());
 
-                smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, targetLevelValidation);
+                smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, smrVlCandle);
                 boolean isSnr = smr.isSmrLong();
                 boolean isSnrEntry;
 
                 String targetResult = target.getReachedHighFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvlMinus2TF);
 
                 if (isSnr) {
-                    isSnrEntry = entryModels.entryModelLongTest(candlesOnMinus2TF, fractalsHighMinus2TF, candleInvlMinus2TF, targetValidationCandle);
+                    isSnrEntry = smr.entryModelLongTest();
                     entryModel++;
 
                     if (isSnrEntry) {
@@ -78,21 +78,20 @@ public class EntryModelsStatistic extends BaseStatistic {
                 Candle candleInvlMinus2TF = candleHelper.getCandleByHigh(candlesOnMinus2TF, candleInvlMinus1TF);
 
                 Candle rebalancedFractalMinus2TF = candleHelper.getHighRebalancedFractalMinus2TF(candlesOnMinus2TF, fractalsHigh, candleInvlMinus1TF);
-                Candle targetLevelValidation = candleHelper.getTargetLowLevelValidation(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF);
-                Candle targetValidationCandle = target.getTargetLowLevelValidatedCandle(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF);
+                Candle smrVlCandle = candleHelper.getTargetLowLevelValidation(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF);
 
                 double entry = Double.parseDouble(entryPoint.getBosLowLevel(fractalsLowMinus2TF, candleInvlMinus2TF).getMid().getL());
                 double takeProfit = Double.parseDouble(takeProfitMinus2TF.getMid().getL());
                 double stopLoss = Double.parseDouble(candleInvlMinus2TF.getMid().getH());
 
-                smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, targetLevelValidation);
+                smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, smrVlCandle);
                 boolean isSnr = smr.isSmrShort();
                 boolean isSnrEntry;
 
                 String targetResult = target.getReachedLowFractalTarget(candlesOnMinus2TF, takeProfitMinus2TF, candleInvlMinus2TF);
 
                 if (isSnr) {
-                    isSnrEntry = entryModels.entryModelShortTest(candlesOnMinus2TF, fractalsLowMinus2TF, candleInvlMinus2TF, targetValidationCandle);
+                    isSnrEntry = smr.entryModelShortTest();
                     entryModel++;
 
                     if (isSnrEntry) {

@@ -11,23 +11,40 @@ import java.util.List;
 
 public class EntryModels {
 
-    private final Sweep sweep = new Sweep();
-    private final Target target = new Target();
-    private final Rebalance reBalance = new Rebalance();
-    private final CandleHelper candleHelper = new CandleHelper();
+    protected Sweep sweep = new Sweep();
+    protected Target target = new Target();
+    protected Rebalance reBalance = new Rebalance();
+    protected CandleHelper candleHelper = new CandleHelper();
 
-    public boolean entryModelLongTest(List<Candle> candles, List<Candle> fractalsHighMinus2TF, Candle candleInvlMinus2TF, Candle targetValidationCandle) {
+    protected List<Candle> fractalsLow;
+    protected List<Candle> fractalsHigh;
+    protected List<Candle> candles;
+    protected Candle candleInvl;
+    protected Candle rebalancedFractal;
+    protected Candle smrVl;
+
+    public EntryModels(List<Candle> fractalsLow, List<Candle> fractalsHigh, List<Candle> candles, Candle candleInvl, Candle rebalancedFractal, Candle smrVl) {
+        this.fractalsLow = fractalsLow;
+        this.fractalsHigh = fractalsHigh;
+        this.candles = candles;
+        this.candleInvl = candleInvl;
+        this.rebalancedFractal = rebalancedFractal;
+        this.smrVl = smrVl;
+    }
+
+
+  public boolean entryModelLongTest() {
         boolean isSnrTest = false;
-        List<Candle> candlesSubList = candleHelper.getCandleSublistEntry(candles, targetValidationCandle);
+        List<Candle> candlesSubList = candleHelper.getCandleSublistEntry(candles, smrVl);
 
-        int indexBosLevel = candleHelper.getHighFractalIndexBeforeSweep(fractalsHighMinus2TF, candleInvlMinus2TF);
+        int indexBosLevel = candleHelper.getHighFractalIndexBeforeSweep(fractalsHigh, candleInvl);
 
         if (indexBosLevel != -1) {
-            Candle bosLevel = fractalsHighMinus2TF.get(indexBosLevel);
+            Candle bosLevel = fractalsHigh.get(indexBosLevel);
 
-            double candleInvlLow = Double.parseDouble(candleInvlMinus2TF.getMid().getL());
+            double candleInvlLow = Double.parseDouble(candleInvl.getMid().getL());
             double bosLevelHigh = Double.parseDouble(bosLevel.getMid().getH());
-            int index = candlesSubList.indexOf(targetValidationCandle) + 1;
+            int index = candlesSubList.indexOf(smrVl) + 1;
 
             for (int i = index; i < candlesSubList.size(); i++) {
                 Candle candle = candlesSubList.get(i);
@@ -42,18 +59,18 @@ public class EntryModels {
         return isSnrTest;
     }
 
-    public boolean entryModelShortTest(List<Candle> candles, List<Candle> fractalsLowMinus2TF, Candle candleInvlMinus2TF, Candle targetValidationCandle) {
+    public boolean entryModelShortTest() {
         boolean isSnrTest = false;
-        List<Candle> candlesSubList = candleHelper.getCandleSublistEntry(candles, targetValidationCandle);
+        List<Candle> candlesSubList = candleHelper.getCandleSublistEntry(candles, smrVl);
 
-        int indexBosLevel = candleHelper.getLowFractalIndexBeforeSweep(fractalsLowMinus2TF, candleInvlMinus2TF);
+        int indexBosLevel = candleHelper.getLowFractalIndexBeforeSweep(fractalsLow, candleInvl);
 
         if (indexBosLevel != -1) {
-            Candle bosLevel = fractalsLowMinus2TF.get(indexBosLevel);
+            Candle bosLevel = fractalsLow.get(indexBosLevel);
 
-            double candleInvlHigh = Double.parseDouble(candleInvlMinus2TF.getMid().getH());
+            double candleInvlHigh = Double.parseDouble(candleInvl.getMid().getH());
             double bosLevelLow = Double.parseDouble(bosLevel.getMid().getL());
-            int index = candlesSubList.indexOf(targetValidationCandle) + 1;
+            int index = candlesSubList.indexOf(smrVl) + 1;
 
             for (int i = index; i < candlesSubList.size(); i++) {
                 Candle candle = candlesSubList.get(i);

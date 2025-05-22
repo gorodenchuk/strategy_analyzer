@@ -13,9 +13,7 @@ public class BaseStatistic {
 
     protected CandleHelper candleHelper = new CandleHelper();
     protected FvgHelper fvgHelper = new FvgHelper();
-    protected Sweep sweep = new Sweep();
     protected Target target = new Target();
-    protected EntryModels entryModels = new EntryModels();
     protected EntryPoint entryPoint = new EntryPoint();
     protected RiskRewards riskRewards;
     protected Smr smr;
