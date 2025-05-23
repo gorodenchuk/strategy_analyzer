@@ -2,16 +2,18 @@ package strategy.metrics;
 
 public class RiskRewards {
 
-    private final double entryPoint;
-    private final double takeProfit;
-    private final double stopLoss;
-    private final double riskPercent;
+    private double entryPoint;
+    private double takeProfit;
+    private double stopLoss;
+    private double riskPercent;
+    private double rrMin;
 
-    public RiskRewards(double entryPoint, double takeProfit, double stopLoss, double riskPercent) {
+    public RiskRewards(double entryPoint, double takeProfit, double stopLoss, double riskPercent, double rrMin) {
         this.entryPoint = entryPoint;
         this.takeProfit = takeProfit;
         this.stopLoss = stopLoss;
         this.riskPercent = riskPercent;
+        this.rrMin = rrMin;
     }
 
     public double getRiskReward(String targetResult) {
@@ -27,5 +29,16 @@ public class RiskRewards {
         } else{
             return 0.0;
         }
+    }
+
+    public boolean isRrCorrespondMinimumValue(String targetResult) {
+       boolean isRrCorrespondMin = false;
+
+        if (targetResult.equals("TP")) {
+            double profit = takeProfit - entryPoint;
+            double loss = entryPoint - stopLoss;
+            isRrCorrespondMin = Math.abs((profit / loss) * riskPercent) >= rrMin;
+        }
+        return isRrCorrespondMin;
     }
 }
