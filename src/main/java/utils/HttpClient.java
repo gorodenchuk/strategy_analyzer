@@ -51,10 +51,10 @@ public class HttpClient {
         FileRoutine fileRoutine = new FileRoutine();
 //        getCandles("EUR_USD", "M15", "2025-04-30T08:00:00.000000000Z", "2025-04-30T17:00:00.000000000Z");
 
-        final String INSTRUMENT = "EUR_USD";
-        final String GRANULARITY = "H4";
-        final int COUNT = 320;
-        final String PATH = "src/main/resources/response/eur-usd/4h-1h-15m/";
+        final String INSTRUMENT = "GBP_USD";
+        final String GRANULARITY = "M15";
+        final int COUNT = 5000;
+        final String PATH = "src/main/resources/response/gbp-usd/4h-1h-15m/";
         final String FILE_NAME = INSTRUMENT + "_" + GRANULARITY + "_" + COUNT + "_candles.json";
 
         Response response = getCandles(INSTRUMENT, GRANULARITY, COUNT);
