@@ -26,19 +26,15 @@ public class RiskRewards {
         } else if (targetResult.equals("SL")) {
             return riskPercent * -1;
 
-        } else{
+        } else {
             return 0.0;
         }
     }
 
-    public boolean isRrCorrespondMinimumValue(String targetResult) {
-       boolean isRrCorrespondMin = false;
+    public boolean isRrCorrespondMinimumValue() {
+       double profit = takeProfit - entryPoint;
+       double loss = entryPoint - stopLoss;
 
-        if (targetResult.equals("TP")) {
-            double profit = takeProfit - entryPoint;
-            double loss = entryPoint - stopLoss;
-            isRrCorrespondMin = Math.abs((profit / loss) * riskPercent) >= rrMin;
-        }
-        return isRrCorrespondMin;
+       return Math.abs((profit / loss) * riskPercent) >= rrMin;
     }
 }

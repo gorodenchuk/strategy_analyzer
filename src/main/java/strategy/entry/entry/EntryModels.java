@@ -34,7 +34,7 @@ public class EntryModels {
 
 
   public boolean entryModelLongTest() {
-        boolean isSnrTest = false;
+        boolean isSmrTest = false;
         List<Candle> candlesSubList = candleHelper.getCandleSublistEntry(candles, smrVl);
 
         int indexBosLevel = candleHelper.getHighFractalIndexBeforeSweep(fractalsHigh, candleInvl);
@@ -51,16 +51,16 @@ public class EntryModels {
                 double low = Double.parseDouble(candle.getMid().getL());
 
                 if (low > candleInvlLow && low < bosLevelHigh) {
-                    isSnrTest = true;
+                    isSmrTest = true;
                     break;
                 }
             }
         }
-        return isSnrTest;
+        return isSmrTest;
     }
 
     public boolean entryModelShortTest() {
-        boolean isSnrTest = false;
+        boolean isSmrTest = false;
         List<Candle> candlesSubList = candleHelper.getCandleSublistEntry(candles, smrVl);
 
         int indexBosLevel = candleHelper.getLowFractalIndexBeforeSweep(fractalsLow, candleInvl);
@@ -77,11 +77,11 @@ public class EntryModels {
                 double high = Double.parseDouble(candle.getMid().getH());
 
                 if (high < candleInvlHigh && high > bosLevelLow) {
-                    isSnrTest = true;
+                    isSmrTest = true;
                     break;
                 }
             }
         }
-        return isSnrTest;
+        return isSmrTest;
     }
 }

@@ -44,15 +44,15 @@ public class EntryModelsStatistic extends BaseStatistic {
                 smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, smrVlCandle);
                 riskRewards = new RiskRewards(entry, takeProfit, stopLoss, risk, rrMin);
 
-                boolean isSnr = smr.isSmrLong();
-                boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue(targetResult);
-                boolean isSnrEntry;
+                boolean isSmr = smr.isSmrLong();
+                boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue();
+                boolean isSmrEntry;
 
-                if (isSnr && isRrCorrespondMin) {
-                    isSnrEntry = smr.entryModelLongTest();
+                if (isSmr && isRrCorrespondMin) {
+                    isSmrEntry = smr.entryModelLongTest();
                     entryModel++;
 
-                    if (isSnrEntry) {
+                    if (isSmrEntry) {
                         entryModelTest++;
                         rr += riskRewards.getRiskReward(targetResult);
                     }
@@ -95,15 +95,15 @@ public class EntryModelsStatistic extends BaseStatistic {
                 smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, smrVlCandle);
                 riskRewards = new RiskRewards(entry, takeProfit, stopLoss, risk, rrMin);
 
-                boolean isSnr = smr.isSmrShort();
-                boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue(targetResult);
-                boolean isSnrEntry;
+                boolean isSmr = smr.isSmrShort();
+                boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue();
+                boolean isSmrEntry;
 
-                if (isSnr && isRrCorrespondMin) {
-                    isSnrEntry = smr.entryModelShortTest();
+                if (isSmr && isRrCorrespondMin) {
+                    isSmrEntry = smr.entryModelShortTest();
                     entryModel++;
 
-                    if (isSnrEntry) {
+                    if (isSmrEntry) {
                         entryModelTest++;
                         rr += riskRewards.getRiskReward(targetResult);
                     }
@@ -145,15 +145,15 @@ public class EntryModelsStatistic extends BaseStatistic {
                     smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, smrVlCandle);
                     riskRewards = new RiskRewards(entry, takeProfit, stopLoss, risk, rrMin);
 
-                    boolean isSnr = smr.isSmrLong();
-                    boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue(targetResult);
-                    boolean isSnrEntry;
+                    boolean isSmr = smr.isSmrLong();
+                    boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue();
+                    boolean isSmrEntry;
 
-                    if (isSnr && isRrCorrespondMin) {
-                        isSnrEntry = smr.entryModelLongTest();
+                    if (isSmr && isRrCorrespondMin) {
+                        isSmrEntry = smr.entryModelLongTest();
                         entryModel++;
 
-                        if (isSnrEntry) {
+                        if (isSmrEntry) {
                             entryModelTest++;
                             rr += riskRewards.getRiskReward(targetResult);
                         }
@@ -196,15 +196,15 @@ public class EntryModelsStatistic extends BaseStatistic {
                     smr = new Smr(fractalsLowMinus2TF, fractalsHighMinus2TF, candlesOnMinus2TF, candleInvlMinus2TF, rebalancedFractalMinus2TF, smrVlCandle);
                     riskRewards = new RiskRewards(entry, takeProfit, stopLoss, risk, rrMin);
 
-                    boolean isSnr = smr.isSmrShort();
-                    boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue(targetResult);
-                    boolean isSnrEntry;
+                    boolean isSmr = smr.isSmrShort();
+                    boolean isRrCorrespondMin = riskRewards.isRrCorrespondMinimumValue();
+                    boolean isSmrEntry;
 
-                    if (isSnr && isRrCorrespondMin) {
-                        isSnrEntry = smr.entryModelShortTest();
+                    if (isSmr && isRrCorrespondMin) {
+                        isSmrEntry = smr.entryModelShortTest();
                         entryModel++;
 
-                        if (isSnrEntry) {
+                        if (isSmrEntry) {
                             entryModelTest++;
                             rr += riskRewards.getRiskReward(targetResult);
                         }
