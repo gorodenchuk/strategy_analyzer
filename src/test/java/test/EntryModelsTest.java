@@ -78,7 +78,7 @@ public class EntryModelsTest extends BaseTest {
         List<Candle> fractalsHighMinus2TF = sweep.getFractalsHigh(candlesMinus2TF);
 
         entryModelsStatistic.smrHighFractalTarget(RISK, RR_MINIMUM, listOfSweepsLow, fractalsLow, fractalsHigh, candlesMinus1TF, fractalsHighMinus1TF, candlesMinus2TF, fractalsHighMinus2TF, fractalsLowMinus2TF);
-        entryModelsStatistic.smrLowFractalTarget(RISK, RR_MINIMUM,listOfSweepsHigh, fractalsHigh, fractalsLow, candlesMinus1TF, fractalsLowMinus1TF, candlesMinus2TF, fractalsLowMinus2TF, fractalsHighMinus2TF);
+        entryModelsStatistic.smrLowFractalTarget(RISK, RR_MINIMUM, listOfSweepsHigh, fractalsHigh, fractalsLow, candlesMinus1TF, fractalsLowMinus1TF, candlesMinus2TF, fractalsLowMinus2TF, fractalsHighMinus2TF);
     }
 
     @AfterMethod

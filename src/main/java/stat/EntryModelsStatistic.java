@@ -49,8 +49,8 @@ public class EntryModelsStatistic extends BaseStatistic {
                 boolean isSmrEntry;
 
                 if (isSmr && isRrCorrespondMin) {
-                    isSmrEntry = smr.entryModelLongTest();
                     entryModel++;
+                    isSmrEntry = smr.entryModelLongTest();
 
                     if (isSmrEntry) {
                         entryModelTest++;
@@ -100,8 +100,8 @@ public class EntryModelsStatistic extends BaseStatistic {
                 boolean isSmrEntry;
 
                 if (isSmr && isRrCorrespondMin) {
-                    isSmrEntry = smr.entryModelShortTest();
                     entryModel++;
+                    isSmrEntry = smr.entryModelShortTest();
 
                     if (isSmrEntry) {
                         entryModelTest++;
@@ -150,8 +150,8 @@ public class EntryModelsStatistic extends BaseStatistic {
                     boolean isSmrEntry;
 
                     if (isSmr && isRrCorrespondMin) {
-                        isSmrEntry = smr.entryModelLongTest();
                         entryModel++;
+                        isSmrEntry = smr.entryModelLongTest();
 
                         if (isSmrEntry) {
                             entryModelTest++;
@@ -201,8 +201,8 @@ public class EntryModelsStatistic extends BaseStatistic {
                     boolean isSmrEntry;
 
                     if (isSmr && isRrCorrespondMin) {
-                        isSmrEntry = smr.entryModelShortTest();
                         entryModel++;
+                        isSmrEntry = smr.entryModelShortTest();
 
                         if (isSmrEntry) {
                             entryModelTest++;
