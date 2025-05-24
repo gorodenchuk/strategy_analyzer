@@ -52,9 +52,9 @@ public class HttpClient {
 //        getCandles("EUR_USD", "M15", "2025-04-30T08:00:00.000000000Z", "2025-04-30T17:00:00.000000000Z");
 
         final String INSTRUMENT = "GBP_USD";
-        final String GRANULARITY = "M15";
+        final String GRANULARITY = "H1";
         final int COUNT = 5000;
-        final String PATH = "src/main/resources/response/gbp-usd/4h-1h-15m/";
+        final String PATH = "src/main/resources/response/gbp-usd/daily-4h-1h/";
         final String FILE_NAME = INSTRUMENT + "_" + GRANULARITY + "_" + COUNT + "_candles.json";
 
         Response response = getCandles(INSTRUMENT, GRANULARITY, COUNT);

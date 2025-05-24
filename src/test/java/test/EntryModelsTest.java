@@ -21,9 +21,9 @@ public class EntryModelsTest extends BaseTest {
     }
 
 
-    @Test(enabled = false, description = "Price reversal after Sweep with with entry model on -2 TF with SL below the Context")
+    @Test(enabled = true, description = "Price reversal after Sweep with with entry model on -2 TF with SL below the Context")
     public void entryAfterSweepWithEntryModelOnMinus2TF() throws IOException {
-        String data = fileRoutine.readResourceAsString("response/eur-usd/4h-1h-15m/", "EUR_USD_H4_320_candles.json");
+        String data = fileRoutine.readResourceAsString("response/gbp-usd/daily-4h-1h/", "GBP_USD_D_210_candles.json");
         InputCandle inputCandle = baseStrategy.getMappedObject(data, InputCandle.class);
         List<Candle> candles = inputCandle.getCandles();
 
@@ -33,14 +33,14 @@ public class EntryModelsTest extends BaseTest {
         List<Candle> listOfSweepsHigh = sweep.sweepHigh(candles, fractalsHigh).stream().distinct().toList();
         List<Candle> listOfSweepsLow = sweep.sweepLow(candles, fractalsLow).stream().distinct().toList();
 
-        String dataMinus1TF = fileRoutine.readResourceAsString("response/eur-usd/4h-1h-15m/", "EUR_USD_H1_1250_candles.json");
+        String dataMinus1TF = fileRoutine.readResourceAsString("response/gbp-usd/daily-4h-1h/", "GBP_USD_H4_1250_candles.json");
         InputCandle inputCandleMinus1TF = baseStrategy.getMappedObject(dataMinus1TF, InputCandle.class);
         List<Candle> candlesMinus1TF = inputCandleMinus1TF.getCandles();
 
         List<Candle> fractalsLowMinus1TF = sweep.getFractalsLow(candlesMinus1TF);
         List<Candle> fractalsHighMinus1TF = sweep.getFractalsHigh(candlesMinus1TF);
 
-        String dataMinus2TF = fileRoutine.readResourceAsString("response/eur-usd/4h-1h-15m/", "EUR_USD_M15_5000_candles.json");
+        String dataMinus2TF = fileRoutine.readResourceAsString("response/gbp-usd/daily-4h-1h/", "GBP_USD_H1_5000_candles.json");
         InputCandle inputCandleMinus2TF = baseStrategy.getMappedObject(dataMinus2TF, InputCandle.class);
         List<Candle> candlesMinus2TF = inputCandleMinus2TF.getCandles();
 
@@ -53,7 +53,7 @@ public class EntryModelsTest extends BaseTest {
 
     @Test(enabled = true, description = "Price reversal after Sweep with with entry model on -2 TF with SL below the Context TP on same with Context TF")
     public void entryWithEntryModelAndTarketOnContextTf() throws IOException {
-        String data = fileRoutine.readResourceAsString("response/eur-usd/4h-1h-15m/", "EUR_USD_H4_320_candles.json");
+        String data = fileRoutine.readResourceAsString("response/gbp-usd/daily-4h-1h/", "GBP_USD_D_210_candles.json");
         InputCandle inputCandle = baseStrategy.getMappedObject(data, InputCandle.class);
         List<Candle> candles = inputCandle.getCandles();
 
@@ -63,14 +63,14 @@ public class EntryModelsTest extends BaseTest {
         List<Candle> listOfSweepsHigh = sweep.sweepHigh(candles, fractalsHigh).stream().distinct().toList();
         List<Candle> listOfSweepsLow = sweep.sweepLow(candles, fractalsLow).stream().distinct().toList();
 
-        String dataMinus1TF = fileRoutine.readResourceAsString("response/eur-usd/4h-1h-15m/", "EUR_USD_H1_1250_candles.json");
+        String dataMinus1TF = fileRoutine.readResourceAsString("response/gbp-usd/daily-4h-1h/", "GBP_USD_H4_1250_candles.json");
         InputCandle inputCandleMinus1TF = baseStrategy.getMappedObject(dataMinus1TF, InputCandle.class);
         List<Candle> candlesMinus1TF = inputCandleMinus1TF.getCandles();
 
         List<Candle> fractalsLowMinus1TF = sweep.getFractalsLow(candlesMinus1TF);
         List<Candle> fractalsHighMinus1TF = sweep.getFractalsHigh(candlesMinus1TF);
 
-        String dataMinus2TF = fileRoutine.readResourceAsString("response/eur-usd/4h-1h-15m/", "EUR_USD_M15_5000_candles.json");
+        String dataMinus2TF = fileRoutine.readResourceAsString("response/gbp-usd/daily-4h-1h/", "GBP_USD_H1_5000_candles.json");
         InputCandle inputCandleMinus2TF = baseStrategy.getMappedObject(dataMinus2TF, InputCandle.class);
         List<Candle> candlesMinus2TF = inputCandleMinus2TF.getCandles();
 
